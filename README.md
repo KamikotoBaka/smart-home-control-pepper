@@ -28,18 +28,23 @@ The UI works in parallel with voice control and communicates with the OpenHAB se
 
 ### Upload the UI to Pepper
 
-Use **SSH** to connect to your Pepper robot and upload the UI directory:
-
-```bash
-scp -r ./smart-home-ui nao@<pepper-ip>:/home/nao/
-
-Replace <pepper-ip> with your robot's IP address.
-
-You should now have the UI at:
-/home/nao/smart-home-ui/
+  Use **SSH** to connect to your Pepper robot and upload the UI directory:
 
 
-Launch the UI with PepperControl.py
-Use your Python control script to open the WebView with the correct file path:
+  scp -r ./smart-home-ui nao@<pepper-ip>:/home/nao/
 
-ALTabletService.showWebView("file:///home/nao/smart-home-ui/views/index.html")
+  Replace <pepper-ip> with your robot's IP address.
+
+  You should now have the UI at:
+  /home/nao/smart-home-ui/
+
+
+  Launch the UI with PepperControl.py
+  Use your Python control script to open the WebView with the correct file path:
+
+  ALTabletService.showWebView("file:///home/nao/smart-home-ui/views/index.html")
+
+
+  🙋 Contact
+  Created by KamikotoBaka
+  Smart Home Lab – Hochschule Furtwangen
