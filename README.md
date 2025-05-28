@@ -45,6 +45,6 @@ The UI works in parallel with voice control and communicates with the OpenHAB se
   ALTabletService.showWebView("file:///home/nao/smart-home-ui/views/index.html")
 
 
-  🙋 Contact
+  🙋 
   Created by KamikotoBaka
   Smart Home Lab – Hochschule Furtwangen
