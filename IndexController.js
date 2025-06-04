@@ -1,13 +1,13 @@
 var buttonStates = {};
 var IndexController = {
-  init: function (buttonId, itemNames) {
+  init: function(buttonId, itemNames) {
     var btn = document.getElementById(buttonId);
-    if (!btn) {
+    if(!btn) {
       console.warn("Button mit ID '" + buttonId + "' nicht gefunden.");
       return;
     }
     // Ensure itemNames is always an array
-    if (!Array.isArray(itemNames)) {
+    if(!Array.isArray(itemNames)) {
       itemNames = [itemNames];
     }
     // Subscribe to all items for live updates
@@ -26,7 +26,7 @@ var IndexController = {
     });
   });
   
-    btn.onclick = function () {
+    btn.onclick = function() {
       var currentState = btn.dataset.currentState || "OFF";
       var newState = currentState === "ON" ? "OFF" : "ON";
       itemNames.forEach(function (itemName) {
@@ -37,47 +37,47 @@ var IndexController = {
     };
   },
   
-  initRolladen: function (buttonId, itemName, command, windowSensors) {
+  initRolladen: function(buttonId, itemName, command, windowSensors) {
     var btn = document.getElementById(buttonId);
-    if (!btn) {
+    if(!btn){
       console.warn("Button mit ID '" + buttonId + "' nicht gefunden.");
       return;
     }
   
     // Set up the button to send the specific command
-    btn.onclick = function () {
-      if (command === "DOWN" && windowSensors && windowSensors.length > 0) {
+    btn.onclick = function() {
+      if(command === "DOWN" && windowSensors && windowSensors.length > 0) {
         // Check the state of all window sensors
         var allClosed = true;
-        for (var i = 0; i < windowSensors.length; i++) {
+        for(var i = 0; i < windowSensors.length; i++) {
           OpenHAB.getState(windowSensors[i], function (state) {
-            if (state === "OPEN") {
+            if(state === "OPEN") {
               allClosed = false;
             }
           });
         }
         // Delay to ensure all states are checked
         setTimeout(function () {
-          if (allClosed) {
+          if(allClosed) {
             // All windows are closed, send the DOWN command
             OpenHAB.sendCommand(itemName, command);
             console.log(`Command '${command}' sent to '${itemName}'`);
-          } else {
+          } else{
             // At least one window is open, show a warning
             console.warn("Rolladen kann nicht herunterfahren, da ein Fenster geöffnet ist.");
             alert("Ein Fenster ist geöffnet. Bitte schließen Sie alle Fenster, bevor Sie den Rolladen herunterfahren.");
           }
         }, 1000); // Adjust delay if necessary
-      } else {
+      } else{
         // For other commands (UP, STOP), or if no sensors are provided
         OpenHAB.sendCommand(itemName, command);
         console.log(`Command '${command}' sent to '${itemName}'`);
       }
     };
   },
-  initHide: function (buttonId, lockItemName, rolladenItemName) {
+  initHide: function(buttonId, lockItemName, rolladenItemName) {
     var btn = document.getElementById(buttonId);
-    if (!btn) {
+    if(!btn) {
       console.warn("Button mit ID '" + buttonId + "' nicht gefunden.");
       return;
     }
@@ -86,7 +86,7 @@ var IndexController = {
       var currentState = btn.dataset.currentState || "OFF";
       var newState = currentState === "ON" ? "OFF" : "ON";
 
-      if (newState === "ON") {
+      if(newState === "ON") {
         // Lock the door and move the roller shutters down
         OpenHAB.sendCommand(lockItemName, "ON");
         OpenHAB.sendCommand(rolladenItemName, "DOWN");
@@ -102,17 +102,17 @@ var IndexController = {
       View.updateButton(buttonId, newState);
     };
   },
-  initMeeting: function (buttonId, rolladenItemName, lightItemName) {
+  initMeeting: function(buttonId, rolladenItemName, lightItemName) {
     var btn = document.getElementById(buttonId);
-    if (!btn) {
+    if(!btn) {
       console.warn("Button mit ID '" + buttonId + "' nicht gefunden.");
       return;
     }
     // Set up the button to toggle meeting mode
-    btn.onclick = function () {
+    btn.onclick = function() {
       var currentState = btn.dataset.currentState || "OFF";
       var newState = currentState === "ON" ? "OFF" : "ON";
-      if (newState === "ON") {
+      if(newState === "ON") {
         // Rolladen goes DOWN for 5 seconds and then STOP
         OpenHAB.sendCommand(rolladenItemName, "DOWN");
         console.log(`Rolladen (${rolladenItemName}) moving DOWN.`);
@@ -137,14 +137,14 @@ var IndexController = {
       View.updateButton(buttonId, newState);
     };
   },
-   initReset: function (buttonId, rolladenItems, lightItems, coffeeItem, radioItem, hideItem, ventilationItem, LinkingParkItem, movieNightItem, speakerItems) {
+   initReset: function(buttonId, rolladenItems, lightItems, coffeeItem, radioItem, hideItem, ventilationItem, LinkingParkItem, movieNightItem, speakerItems) {
     var btn = document.getElementById(buttonId);
-    if (!btn) {
+    if(!btn) {
       console.warn("Button mit ID '" + buttonId + "' nicht gefunden.");
       return;
     }
     // Set up the button to reset everything
-    btn.onclick = function () {
+    btn.onclick = function() {
       console.log("Resetting all devices...");
       // Turn off all lights
       lightItems.forEach(function (lightItem) {
@@ -184,10 +184,10 @@ var IndexController = {
       console.log("All devices reset.");
     };
   },
-  initColorLight: function (buttonId, inputId, itemName) {
+  initColorLight: function(buttonId, inputId, itemName) {
     var btn = document.getElementById(buttonId);
     var colorInput = document.getElementById(inputId);
-    if (!btn || !colorInput) {
+    if(!btn || !colorInput) {
       console.warn(`Button with ID '${buttonId}' or input with ID '${inputId}' not found.`);
       return;
     }
@@ -204,14 +204,14 @@ var IndexController = {
       OpenHAB.sendCommand(itemName, hsbValue);
     };
   },
-  initLaborColorLight: function (buttonId, inputId, itemNames) {
+  initLaborColorLight: function(buttonId, inputId, itemNames) {
   var btn = document.getElementById(buttonId);
   var colorInput = document.getElementById(inputId);
-  if (!btn || !colorInput) {
+  if(!btn || !colorInput) {
     console.warn(`Button with ID '${buttonId}' or input with ID '${inputId}' not found.`);
     return;
   }
-  btn.onclick = function () {
+  btn.onclick = function() {
     var hexColor = colorInput.value;
     var hsb = hexToHsb(hexColor);
     var hsbValue = `${hsb.h},${hsb.s},${hsb.b}`;
@@ -221,15 +221,15 @@ var IndexController = {
     });
   };
   },
-  initLightBrightness: function (buttonId, inputId, itemName) {
+  initLightBrightness: function(buttonId, inputId, itemName) {
     var btn = document.getElementById(buttonId);
     var brightnessInput = document.getElementById(inputId);
-    if (!btn || !brightnessInput) {
+    if(!btn || !brightnessInput) {
       console.warn(`Button with ID '${buttonId}' or input with ID '${inputId}' not found.`);
       return;
     }
     // Set up the button to change the light brightness
-    btn.onclick = function () {
+    btn.onclick = function() {
       // Get the brightness value from the input
       var brightness = brightnessInput.value; // Value between 0 and 100
       // Validate the brightness value
@@ -239,14 +239,14 @@ var IndexController = {
       OpenHAB.sendCommand(itemName, brightness.toString());
     };
   },
-  initLaborLightBrightness: function (buttonId, inputId, itemNames) {
+  initLaborLightBrightness: function(buttonId, inputId, itemNames) {
   var btn = document.getElementById(buttonId);
   var brightnessInput = document.getElementById(inputId);
   if (!btn || !brightnessInput) {
     console.warn(`Button with ID '${buttonId}' or input with ID '${inputId}' not found.`);
     return;
   }
-  btn.onclick = function () {
+  btn.onclick = function() {
     var brightness = brightnessInput.value;
     brightness = Math.max(0, Math.min(100, parseInt(brightness, 10)));
     itemNames.forEach(function (itemName) {
@@ -256,17 +256,17 @@ var IndexController = {
   };
   },
   
-  initPartyMode: function (buttonId, speakerAPIs, mp3Sound) {
+  initPartyMode: function(buttonId, speakerAPIs, mp3Sound) {
     var btn = document.getElementById(buttonId);
-    if (!btn) {
+    if(!btn) {
       console.warn(`Button with ID '${buttonId}' not found.`);
       return;
     }
     // Set up the button to toggle party mode
-    btn.onclick = function () {
+    btn.onclick = function() {
       var currentState = btn.dataset.currentState || "OFF";
       var newState = currentState === "ON" ? "OFF" : "ON";
-      if (newState === "ON") {
+      if(newState === "ON") {
         // Play the MP3 sound on all speakers
         speakerAPIs.forEach(function (speakerAPI) {
           OpenHAB.sendCommand(speakerAPI, mp3Sound);

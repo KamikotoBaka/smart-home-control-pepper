@@ -1,13 +1,13 @@
 function toggleDarkMode() {
   const body = document.body;
   const darkModeButton = document.getElementById("darkModeToggle");
-  if (!darkModeButton) {
+  if(!darkModeButton) {
     console.warn("Dark Mode button not found.");
     return;
   }
   console.log("Toggling dark mode...");
   body.classList.toggle("dark-mode");
-  if (body.classList.contains("dark-mode")) {
+  if(body.classList.contains("dark-mode")) {
     darkModeButton.textContent = "Dark Mode AUS";
     console.log("Dark mode enabled.");
   } else {
@@ -19,7 +19,7 @@ function toggleDarkMode() {
 function bootstrap() {
    // Initialize Dark Mode button
    const darkModeButton = document.getElementById("darkModeToggle");
-   if (darkModeButton) {
+   if(darkModeButton) {
      darkModeButton.addEventListener("click", toggleDarkMode);
      console.log("Dark Mode button initialized.");
    } else {

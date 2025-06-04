@@ -1,8 +1,8 @@
 var View = {
-  updateButton: function (buttonId, state) {
+  updateButton: function(buttonId, state) {
     var btn = document.getElementById(buttonId);
-    if (!btn) return;
-    if (state === "ON") {
+    if(!btn) return;
+    if(state === "ON") {
       btn.textContent = "EIN"; // Update button text to "EIN" when ON
       btn.classList.remove("btn-off");
       btn.classList.add("btn-on");
