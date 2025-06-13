@@ -9,6 +9,7 @@ var OpenHAB = {
     xhr.send(command);
   },
 
+  
   getState: function(itemName, callback) {
     var url = this.baseUrl + "/items/" + itemName;
     var xhr = new XMLHttpRequest();

@@ -16,6 +16,7 @@ function toggleDarkMode() {
   }
 }
 
+
 function bootstrap() {
    // Initialize Dark Mode button
    const darkModeButton = document.getElementById("darkModeToggle");
@@ -34,12 +35,12 @@ function bootstrap() {
     "iKonferenz_Homematic_Fenster4_Position",
     "iKonferenz_Homematic_Fenster5_Position",
     "iKonferenz_Homematic_Fenster6_Position",
-];
-var windowSensorsMultimedia =[
-  "iMultimedia_Homematic_Fenster1_Position",
-  "iMultimedia_Homematic_Fenster2_Position",
-  "iMultimedia_Homematic_Fenster3_Position",
-];
+  ];
+  var windowSensorsMultimedia =[
+    "iMultimedia_Homematic_Fenster1_Position",
+    "iMultimedia_Homematic_Fenster2_Position",
+    "iMultimedia_Homematic_Fenster3_Position",
+  ];
   // ROLLADEN
   IndexController.initRolladen("rolladenRunter", "iKonferenz_Somfy_Rollladen2_Steuerung", "DOWN", windowSensorsKonferenz1);
   IndexController.initRolladen("rolladenStopp", "iKonferenz_Somfy_Rollladen2_Steuerung", "STOP");
@@ -171,7 +172,9 @@ var windowSensorsMultimedia =[
   });
 }
 
+
   window.session = new QiSession();
 
+  
   window.onload = bootstrap;
 

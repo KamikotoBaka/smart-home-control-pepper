@@ -37,6 +37,7 @@ var IndexController = {
     };
   },
   
+
   initRolladen: function(buttonId, itemName, command, windowSensors) {
     var btn = document.getElementById(buttonId);
     if(!btn){
@@ -75,6 +76,8 @@ var IndexController = {
       }
     };
   },
+
+
   initHide: function(buttonId, lockItemName, rolladenItemName) {
     var btn = document.getElementById(buttonId);
     if(!btn) {
@@ -102,6 +105,8 @@ var IndexController = {
       View.updateButton(buttonId, newState);
     };
   },
+
+
   initMeeting: function(buttonId, rolladenItemName, lightItemName) {
     var btn = document.getElementById(buttonId);
     if(!btn) {
@@ -137,6 +142,8 @@ var IndexController = {
       View.updateButton(buttonId, newState);
     };
   },
+
+
    initReset: function(buttonId, rolladenItems, lightItems, coffeeItem, radioItem, hideItem, ventilationItem, LinkingParkItem, movieNightItem, speakerItems) {
     var btn = document.getElementById(buttonId);
     if(!btn) {
@@ -184,6 +191,8 @@ var IndexController = {
       console.log("All devices reset.");
     };
   },
+
+
   initColorLight: function(buttonId, inputId, itemName) {
     var btn = document.getElementById(buttonId);
     var colorInput = document.getElementById(inputId);
@@ -204,6 +213,8 @@ var IndexController = {
       OpenHAB.sendCommand(itemName, hsbValue);
     };
   },
+
+
   initLaborColorLight: function(buttonId, inputId, itemNames) {
   var btn = document.getElementById(buttonId);
   var colorInput = document.getElementById(inputId);
@@ -221,6 +232,8 @@ var IndexController = {
     });
   };
   },
+
+
   initLightBrightness: function(buttonId, inputId, itemName) {
     var btn = document.getElementById(buttonId);
     var brightnessInput = document.getElementById(inputId);
@@ -239,10 +252,12 @@ var IndexController = {
       OpenHAB.sendCommand(itemName, brightness.toString());
     };
   },
+
+
   initLaborLightBrightness: function(buttonId, inputId, itemNames) {
   var btn = document.getElementById(buttonId);
   var brightnessInput = document.getElementById(inputId);
-  if (!btn || !brightnessInput) {
+  if(!btn || !brightnessInput) {
     console.warn(`Button with ID '${buttonId}' or input with ID '${inputId}' not found.`);
     return;
   }
@@ -256,6 +271,7 @@ var IndexController = {
   };
   },
   
+
   initPartyMode: function(buttonId, speakerAPIs, mp3Sound) {
     var btn = document.getElementById(buttonId);
     if(!btn) {
@@ -285,11 +301,15 @@ var IndexController = {
     };
   }
 };
+
+
 function updateGroupButtonState(buttonId, itemNames) {
   // All ON logic:
   var allOn = itemNames.every(item => buttonStates[item] === "ON");
   View.updateButton(buttonId, allOn ? "ON" : "OFF");
 }
+
+
 function hexToHsb(hex) {
   // Remove the "#" if present
   hex = hex.replace("#", "");
@@ -305,8 +325,8 @@ function hexToHsb(hex) {
   var delta = max - min;
 
   var h = 0;
-  if (delta !== 0) {
-    if (max === r) {
+  if(delta !== 0) {
+    if(max === r) {
       h = ((g - b) / delta) % 6;
     } else if (max === g) {
       h = (b - r) / delta + 2;
