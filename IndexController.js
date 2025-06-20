@@ -342,3 +342,28 @@ function hexToHsb(hex) {
 
   return { h, s, b };
 }
+
+
+function updateServerStatusBubble(isConnected) {
+  var bubble = document.getElementById('server-status-bubble');
+  if (bubble) {
+    bubble.style.background = isConnected ? 'green' : 'red';
+  }
+}
+
+
+function checkServerConnection() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://192.168.0.5:8080/rest/items/iKueche_Hue_Lampen_Schalter', true);
+  xhr.onload = function () {
+    updateServerStatusBubble(xhr.status >= 200 && xhr.status < 300);
+  };
+  xhr.onerror = function () {
+    updateServerStatusBubble(false);
+  };
+  xhr.send();
+}
+
+
+setInterval(checkServerConnection, 5000);
+checkServerConnection();
